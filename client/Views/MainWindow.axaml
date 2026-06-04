@@ -1,0 +1,385 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:QnEvt.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="960" d:DesignHeight="600"
+        x:Class="QnEvt.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="QnEvt"
+        Icon="/Assets/QnEvt.ico"
+        Width="960" Height="650"
+        MinWidth="900" MinHeight="600"
+        WindowStartupLocation="CenterScreen"
+        Background="{Binding ThemeBg}">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+
+    <Window.Styles>
+
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="#0F0F1A"/>
+            <Setter Property="Foreground" Value="#E0E0FF"/>
+            <Setter Property="BorderBrush" Value="#2A2A40"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+        <Style Selector="TextBox:focus">
+            <Setter Property="BorderBrush" Value="#00E5FF"/>
+        </Style>
+
+
+        <Style Selector="ComboBox">
+            <Setter Property="Background" Value="#0F0F1A"/>
+            <Setter Property="Foreground" Value="#E0E0FF"/>
+            <Setter Property="BorderBrush" Value="#2A2A40"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+        <Style Selector="ComboBox:focus">
+            <Setter Property="BorderBrush" Value="#00E5FF"/>
+        </Style>
+
+
+        <Style Selector="TextBlock.hud-label">
+            <Setter Property="Foreground" Value="#8F9FB3"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+        </Style>
+
+        <Style Selector="Button.connect-btn">
+            <Setter Property="Background">
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                    <GradientStop Offset="0.0" Color="#00B0FF"/>
+                    <GradientStop Offset="1.0" Color="#00E5FF"/>
+                </LinearGradientBrush>
+            </Setter>
+            <Setter Property="Foreground" Value="#08080C"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="16,12"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.25"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.connect-btn:hover">
+            <Setter Property="Opacity" Value="0.9"/>
+        </Style>
+    </Window.Styles>
+
+
+    <Grid RowDefinitions="Auto, *, 220" Margin="16">
+
+
+        <Border Grid.Row="0" BorderBrush="{Binding ThemeBorderBrush}" BorderThickness="0,0,0,1" Padding="0,0,0,12" Margin="0,0,0,16">
+            <Grid ColumnDefinitions="*, Auto">
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="12">
+                    <Border Width="32" Height="32" CornerRadius="6" ClipToBounds="True">
+                        <Image Source="/Assets/QnEvt.png" Stretch="UniformToFill"/>
+                    </Border>
+
+                    <StackPanel>
+                        <TextBlock Text="{Binding LblTitle}" Foreground="{Binding ThemeTextPrimary}" FontSize="18" FontWeight="ExtraBold" LetterSpacing="2"/>
+                        <TextBlock Text="{Binding LblSubtitle}" Foreground="{Binding ThemeLogoStroke}" FontSize="9" FontWeight="Bold" LetterSpacing="1"/>
+                    </StackPanel>
+                </StackPanel>
+
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+
+                    <Button Command="{Binding ToggleLanguageCommand}" Background="{Binding ThemeSubtleBg}" BorderBrush="{Binding ThemeBorderBrush}" BorderThickness="1" CornerRadius="4" Padding="8,4">
+                        <StackPanel Orientation="Horizontal" Spacing="4">
+                            <TextBlock Text="🌐" FontSize="11" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding LblLanguageToggle}" Foreground="{Binding ThemeTextPrimary}" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+
+                    <Button Command="{Binding ToggleThemeCommand}" Background="{Binding ThemeSubtleBg}" BorderBrush="{Binding ThemeBorderBrush}" BorderThickness="1" CornerRadius="4" Padding="8,4">
+                        <StackPanel Orientation="Horizontal" Spacing="4">
+                            <TextBlock Text="{Binding ThemeToggleIcon}" FontSize="11" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding LblThemeToggle}" Foreground="{Binding ThemeTextPrimary}" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+
+                    <Border CornerRadius="4" Background="{Binding ThemeSubtleBg}" Padding="8,4" BorderBrush="{Binding ThemeBorderBrush}" BorderThickness="1">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+
+                            <Ellipse Width="8" Height="8" Fill="{Binding StatusColor}" VerticalAlignment="Center">
+                                <Ellipse.Transitions>
+                                    <Transitions>
+                                        <BrushTransition Property="Fill" Duration="0:0:0.3"/>
+                                    </Transitions>
+                                </Ellipse.Transitions>
+                            </Ellipse>
+                            <TextBlock Text="{Binding ConnectionStatusText}" Foreground="{Binding ThemeTextPrimary}" FontSize="10" FontWeight="Bold" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+
+        <Grid Grid.Row="1" ColumnDefinitions="360, *, *" Margin="0,0,0,16">
+
+
+            <Border Grid.Column="0" Background="{Binding ThemePanelBg}" BorderBrush="{Binding ThemeBorderBrush}" BorderThickness="1" CornerRadius="8" Padding="20" Margin="0,0,12,0">
+                <Grid RowDefinitions="Auto, *, Auto">
+                    <StackPanel Grid.Row="0" Margin="0,0,0,16">
+                        <TextBlock Text="{Binding LblControlDeck}" Foreground="{Binding ThemeLogoStroke}" FontSize="12" FontWeight="Bold" LetterSpacing="1"/>
+                        <TextBlock Text="{Binding LblControlDeckSub}" Foreground="{Binding ThemeTextSecondary}" FontSize="10" Margin="0,2,0,0"/>
+                    </StackPanel>
+
+
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <StackPanel Spacing="16" Margin="0,0,8,0">
+
+                            <StackPanel>
+                                       <Grid ColumnDefinitions="*,Auto">
+                                    <TextBlock Grid.Column="0" Text="{Binding LblPortSelector}" Foreground="{Binding ThemeTextSecondary}" FontSize="11" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                                    <Button Grid.Column="1" Command="{Binding RefreshPortsCommand}" Background="Transparent" BorderThickness="0" Padding="2" Margin="0,-4,0,0">
+                                        <TextBlock Text="⟳ Refresh" Foreground="{Binding ThemeLogoStroke}" FontSize="11" FontWeight="Bold"/>
+                                    </Button>
+                                </Grid>
+                                <ComboBox ItemsSource="{Binding AvailablePorts}" SelectedItem="{Binding SelectedPort}" MaxDropDownHeight="200" Background="{Binding ThemeSubtleBg}" Foreground="{Binding ThemeTextPrimary}" BorderBrush="{Binding ThemeBorderBrush}"/>
+                            </StackPanel>
+
+
+                            <StackPanel>
+                                <TextBlock Text="{Binding LblBaudRate}" Foreground="{Binding ThemeTextSecondary}" FontSize="11" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                                <ComboBox ItemsSource="{Binding AvailableBaudRates}" SelectedItem="{Binding SelectedBaudRate}" Background="{Binding ThemeSubtleBg}" Foreground="{Binding ThemeTextPrimary}" BorderBrush="{Binding ThemeBorderBrush}"/>
+                            </StackPanel>
+
+
+                            <StackPanel>
+                                <TextBlock Text="{Binding LblCloudServer}" Foreground="{Binding ThemeTextSecondary}" FontSize="11" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                                <TextBox Text="{Binding ServerUrl}" PlaceholderText="http://localhost:3000/api/push-random" Background="{Binding ThemeSubtleBg}" Foreground="{Binding ThemeTextPrimary}" BorderBrush="{Binding ThemeBorderBrush}"/>
+                            </StackPanel>
+
+
+                            <StackPanel>
+                                <Grid ColumnDefinitions="*, Auto">
+                                    <TextBlock Grid.Column="0" Text="{Binding LblPushKey}" Foreground="{Binding ThemeTextSecondary}" FontSize="11" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                                    <CheckBox Grid.Column="1" IsChecked="{Binding IsPushKeyVisible}" Content="{Binding LblReveal}" Foreground="{Binding ThemeTextSecondary}" FontSize="10" BorderThickness="1" Margin="0,-6,0,0"/>
+                                </Grid>
+                                <TextBox Text="{Binding PushKey}" PlaceholderText="INV-XXXX-XXXX Active Push Token" PasswordChar="●" RevealPassword="{Binding IsPushKeyVisible}" Background="{Binding ThemeSubtleBg}" Foreground="{Binding ThemeTextPrimary}" BorderBrush="{Binding ThemeBorderBrush}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
+
+
+                    <StackPanel Grid.Row="2" Spacing="8" Margin="0,12,0,0">
+
+                        <Border Background="#2D1115" BorderBrush="#FF1744" BorderThickness="1" CornerRadius="6" Padding="12" Margin="0,0,0,4" IsVisible="{Binding IsKickedOffline}">
+                            <StackPanel Spacing="6">
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <TextBlock Text="⚠️" Foreground="#FF1744" FontSize="14" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding LblKickedTitle}" Foreground="#FF1744" FontSize="12" FontWeight="ExtraBold" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding LblKickedDesc}" Foreground="#E0E0FF" FontSize="10" TextWrapping="Wrap" Margin="2,0,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+
+                        <Button Command="{Binding ResumeUploadCommand}" IsVisible="{Binding IsResumeButtonVisible}" Background="#FF1744" Foreground="#08080C" CornerRadius="6" Padding="16,12" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
+                            <Button.Styles>
+                                <Style Selector="Button:pointerover">
+                                    <Setter Property="Opacity" Value="0.9"/>
+                                </Style>
+                            </Button.Styles>
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBlock Text="⚡" Foreground="#08080C" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding LblResumeUpload}" Foreground="#08080C" FontWeight="Bold" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+
+                        <Button Command="{Binding ToggleConnectionCommand}" Classes="connect-btn" Margin="0">
+                            <Button.Styles>
+                                <Style Selector="Button:pointerover">
+                                    <Setter Property="Background" Value="#00E5FF"/>
+                                </Style>
+                            </Button.Styles>
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBlock Text="{Binding LblConnectTrigger}" Foreground="#08080C" FontWeight="Bold"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+
+            <Border Grid.Column="1" Background="{Binding ThemePanelBg}" BorderBrush="{Binding ThemeBorderBrush}" BorderThickness="1" CornerRadius="8" Padding="20" Margin="0,0,12,0">
+                <Grid RowDefinitions="Auto, *, Auto">
+                    <StackPanel Grid.Row="0" Margin="0,0,0,16">
+                        <TextBlock Text="{Binding LblQuantumMetrics}" Foreground="{Binding ThemeLogoStroke}" FontSize="12" FontWeight="Bold" LetterSpacing="1"/>
+                        <TextBlock Text="{Binding LblMetricsSub}" Foreground="{Binding ThemeTextSecondary}" FontSize="10" Margin="0,2,0,0"/>
+                    </StackPanel>
+
+
+                    <StackPanel Grid.Row="1" VerticalAlignment="Center" Spacing="24">
+
+                        <StackPanel>
+                            <TextBlock Text="{Binding LblTotalEntropy}" Foreground="{Binding ThemeTextSecondary}" FontSize="11" FontWeight="SemiBold" LetterSpacing="0.5"/>
+                            <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,6,0,0">
+                                <TextBlock Text="{Binding FormattedTotalBytes}" Foreground="{Binding ThemeTextPrimary}" FontSize="36" FontWeight="ExtraBold" FontFamily="JetBrains Mono, Courier New"/>
+                                <TextBlock Text="{Binding DynamicLblBytes}" Foreground="#00E676" FontSize="14" FontWeight="Bold" VerticalAlignment="Bottom" Margin="0,0,0,6"/>
+                            </StackPanel>
+                        </StackPanel>
+
+
+                        <StackPanel>
+                            <TextBlock Text="{Binding LblThroughput}" Foreground="{Binding ThemeTextSecondary}" FontSize="11" FontWeight="SemiBold" LetterSpacing="0.5"/>
+                            <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,6,0,0">
+                                <TextBlock Text="{Binding CurrentThroughputKbps, StringFormat='{}{0:F2}'}" Foreground="{Binding ThemeTextPrimary}" FontSize="36" FontWeight="ExtraBold" FontFamily="JetBrains Mono, Courier New"/>
+                                <TextBlock Text="{Binding LblKbps}" Foreground="{Binding ThemeLogoStroke}" FontSize="14" FontWeight="Bold" VerticalAlignment="Bottom" Margin="0,0,0,6"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+
+                    <Border Grid.Row="3" Background="{Binding ThemeSubtleBg}" BorderBrush="{Binding ThemeBorderBrush}" BorderThickness="1" CornerRadius="6" Padding="12,10">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="{Binding LblEngineState}" Foreground="{Binding ThemeTextSecondary}" FontSize="9" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding ConnectionStatusText}" Foreground="{Binding ThemeTextPrimary}" FontSize="11" FontWeight="Bold" Margin="0,2,0,0"/>
+                            </StackPanel>
+                            <Border Grid.Column="1" Background="{Binding StatusColor}" Width="16" Height="16" CornerRadius="8" BorderBrush="rgba(255,255,255,0.1)" BorderThickness="2" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+
+            <Border Grid.Column="2" Background="{Binding ThemePanelBg}" BorderBrush="{Binding ThemeBorderBrush}" BorderThickness="1" CornerRadius="8" Padding="20">
+                <Grid RowDefinitions="Auto, *">
+                    <StackPanel Grid.Row="0" Margin="0,0,0,16">
+                        <TextBlock Text="{Binding LblLinkAnalyzer}" Foreground="{Binding ThemeLogoStroke}" FontSize="12" FontWeight="Bold" LetterSpacing="1"/>
+                        <TextBlock Text="{Binding LblAnalyzerSub}" Foreground="{Binding ThemeTextSecondary}" FontSize="10" Margin="0,2,0,0"/>
+                    </StackPanel>
+
+
+                    <Grid Grid.Row="1" RowDefinitions="*, Auto, Auto" Margin="0,10">
+
+                        <Border Grid.Row="0" Height="120" BorderBrush="{Binding ThemeBorderBrush}" BorderThickness="1" CornerRadius="6" Background="{Binding ThemeTerminalBg}" ClipToBounds="True">
+                            <Grid>
+
+                                <UniformGrid Columns="8" Rows="8" Opacity="0.05">
+                                    <Border BorderBrush="#E0E0FF" BorderThickness="0.5"/>
+                                    <Border BorderBrush="#E0E0FF" BorderThickness="0.5"/>
+                                    <Border BorderBrush="#E0E0FF" BorderThickness="0.5"/>
+                                    <Border BorderBrush="#E0E0FF" BorderThickness="0.5"/>
+                                    <Border BorderBrush="#E0E0FF" BorderThickness="0.5"/>
+                                    <Border BorderBrush="#E0E0FF" BorderThickness="0.5"/>
+                                    <Border BorderBrush="#E0E0FF" BorderThickness="0.5"/>
+                                    <Border BorderBrush="#E0E0FF" BorderThickness="0.5"/>
+                                    <Border BorderBrush="#E0E0FF" BorderThickness="0.5"/>
+                                    <Border BorderBrush="#E0E0FF" BorderThickness="0.5"/>
+                                    <Border BorderBrush="#E0E0FF" BorderThickness="0.5"/>
+                                    <Border BorderBrush="#E0E0FF" BorderThickness="0.5"/>
+                                    <Border BorderBrush="#E0E0FF" BorderThickness="0.5"/>
+                                    <Border BorderBrush="#E0E0FF" BorderThickness="0.5"/>
+                                    <Border BorderBrush="#E0E0FF" BorderThickness="0.5"/>
+                                    <Border BorderBrush="#E0E0FF" BorderThickness="0.5"/>
+                                </UniformGrid>
+
+
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="4">
+                                    <TextBlock Text="TELEMETRY SIGNAL" Foreground="{Binding ThemeLogoStroke}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" LetterSpacing="1"/>
+                                    <ProgressBar Value="{Binding CurrentThroughputKbps}" Minimum="0" Maximum="256" Height="10" Width="180" Background="{Binding ThemeSubtleBg}" Foreground="{Binding ThemeLogoStroke}" BorderThickness="0" CornerRadius="5"/>
+                                    <TextBlock Text="PULSE STABILITY DETECT" Foreground="{Binding ThemeTextSecondary}" FontSize="8" HorizontalAlignment="Center" Margin="0,2,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+
+                        <Grid Grid.Row="1" ColumnDefinitions="*, *" Margin="0,12,0,0">
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="CRYPTO PROTOCOL" Foreground="{Binding ThemeTextSecondary}" FontSize="9"/>
+                                <TextBlock Text="SHA-256 RAW BYTES" Foreground="{Binding ThemeTextPrimary}" FontSize="10" FontWeight="Bold" Margin="0,2,0,0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                                <TextBlock Text="BUFFER QUANTITY" Foreground="{Binding ThemeTextSecondary}" FontSize="9" HorizontalAlignment="Right"/>
+                                <TextBlock Text="1024 BYTE BATCHES" Foreground="{Binding ThemeTextPrimary}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right" Margin="0,2,0,0"/>
+                            </StackPanel>
+                        </Grid>
+
+
+                        <StackPanel Grid.Row="2" Spacing="6" Margin="0,12,0,0">
+
+                            <Button Command="{Binding RebootPico2Command}" Background="{Binding ThemeSubtleBg}" BorderBrush="#FF9100" BorderThickness="1" Foreground="#FF9100" CornerRadius="6" Padding="12" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
+                                <Button.Styles>
+                                    <Style Selector="Button:pointerover">
+                                        <Setter Property="Background" Value="#FF9100"/>
+                                        <Setter Property="Foreground" Value="#08080C"/>
+                                    </Style>
+                                </Button.Styles>
+                                <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                                    <TextBlock Text="⟲" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding LblRebootHardware}" FontWeight="Bold" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
+
+                            <Button Command="{Binding EnterBootselPico2Command}" Background="{Binding ThemeSubtleBg}" BorderBrush="#E040FB" BorderThickness="1" Foreground="#E040FB" CornerRadius="6" Padding="12" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
+                                <Button.Styles>
+                                    <Style Selector="Button:pointerover">
+                                        <Setter Property="Background" Value="#E040FB"/>
+                                        <Setter Property="Foreground" Value="#08080C"/>
+                                    </Style>
+                                </Button.Styles>
+                                <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                                    <TextBlock Text="💾" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding LblEnterBootsel}" FontWeight="Bold" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+
+        </Grid>
+
+
+        <Border Grid.Row="2" Background="{Binding ThemeTerminalBg}" BorderBrush="{Binding ThemeBorderBrush}" BorderThickness="1" CornerRadius="8" Padding="16,12,16,14">
+            <Grid RowDefinitions="Auto, *">
+
+                <Grid Grid.Row="0" ColumnDefinitions="*, Auto" Margin="0,0,0,8">
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="8">
+                        <TextBlock Text="{Binding LblTerminalTitle}" Foreground="{Binding ThemeLogoStroke}" FontSize="11" FontWeight="Bold" LetterSpacing="1" VerticalAlignment="Center"/>
+                        <Border Background="#1C1115" BorderBrush="#4A1E26" BorderThickness="1" CornerRadius="4" Padding="6,2" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding LblTerminalBadge}" Foreground="#FF1744" FontSize="8" FontWeight="Bold"/>
+                        </Border>
+                    </StackPanel>
+
+
+                    <Button Grid.Column="1" Command="{Binding ClearLogsCommand}" Background="Transparent" BorderThickness="0" Padding="4,2" Margin="0,-2,0,0">
+                        <TextBlock Text="{Binding LblClearDiagnostics}" Foreground="{Binding ThemeTextSecondary}" FontSize="10" FontWeight="Bold"/>
+                    </Button>
+                </Grid>
+
+
+                <ScrollViewer Grid.Row="1" Name="TerminalLogScroller" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Background="{Binding ThemeTerminalBg}" CornerRadius="4" Padding="12,8,12,12" BorderBrush="{Binding ThemeBorderBrush}" BorderThickness="1">
+                    <TextBlock Text="{Binding TerminalLogs}" Foreground="{Binding ThemeTerminalText}" FontSize="12" LineHeight="17" FontFamily="JetBrains Mono, Courier New, Consolas, monospace" TextWrapping="Wrap" Margin="0"/>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+
+    </Grid>
+
+</Window>

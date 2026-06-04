@@ -1,0 +1,49 @@
+# Editors and local state
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Secrets and private configuration
+.env
+*.env
+secrets/
+private/
+local/
+*.key
+*.pem
+*.p12
+appsettings.json
+
+# .NET build artifacts
+client/bin/
+client/obj/
+client/publish/
+client/publish_single/
+
+# Firmware and hardware internals are intentionally private in this public repo
+firmware/
+hardware/private/
+hardware/kicad/
+hardware/cad/
+hardware/pcb/
+hardware/schematic/
+hardware/images/private/
+
+# Generated outputs and diagnostics
+build/
+dist/
+out/
+logs/
+*.log
+*.zip
+*.uf2
+*.elf
+*.bin
+*.hex
+*.map
+
+# OS files
+Thumbs.db
+.DS_Store

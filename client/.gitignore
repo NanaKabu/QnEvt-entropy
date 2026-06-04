@@ -1,0 +1,14 @@
+# --- .NET (C#) Build & IDE Artifacts ---
+[Bb]in/
+[Oo]bj/
+*.user
+*.userprefs
+*.suo
+.vs/
+.idea/
+
+# --- Local Secrets and Diagnostics ---
+logs/
+*.log
+.env
+appsettings.json

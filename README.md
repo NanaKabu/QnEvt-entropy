@@ -83,7 +83,7 @@ The public firmware contract is documented as a byte stream protocol:
 - payload
 - CRC16-CCITT
 
-The protocol documents random output, telemetry, warning, error, and control packets. It does not require publishing firmware source.
+The protocol documents random output, telemetry, warning, error, and control packets. The minimal Pico 2 firmware baseline is published here; production firmware internals and private entropy-conditioning logic remain outside this public scope.
 
 See [docs/firmware_protocol.md](docs/firmware_protocol.md).
 

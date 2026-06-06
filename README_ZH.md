@@ -83,7 +83,7 @@ cmake --build .
 - payload
 - CRC16-CCITT
 
-协议文档描述随机输出、遥测、告警、错误和控制包。它不要求公开固件源码。
+协议文档描述随机输出、遥测、告警、错误和控制包。这里已公开最小 Pico 2 固件基线；生产固件内部实现和私有熵调理逻辑不在这个公开范围内。
 
 见 [docs/firmware_protocol_ZH.md](docs/firmware_protocol_ZH.md)。
 

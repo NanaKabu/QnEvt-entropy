@@ -122,4 +122,4 @@ A compatible host parser should:
 
 ## Privacy Boundary
 
-This protocol does not require publishing firmware source, calibration files, board design files, device serial numbers, credentials, production server URLs, or deployment configuration. Public host integrations should rely on this contract rather than private firmware internals.
+This protocol does not require publishing production firmware internals, calibration files, board design files, device serial numbers, credentials, production server URLs, or deployment configuration. The minimal Pico 2 firmware baseline is provided only as a public integration and testing reference. Public host integrations should rely on this contract rather than private firmware internals.

@@ -18,7 +18,7 @@ This directory documents only the public hardware-facing contract for QnEvt entr
 
 ## Not Published
 
-- firmware source internals
+- production firmware internals beyond the public minimal baseline
 - sensor sampling implementation
 - entropy conditioning implementation
 - private health-test thresholds

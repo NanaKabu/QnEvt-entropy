@@ -22,8 +22,8 @@ client/obj/
 client/publish/
 client/publish_single/
 
-# Firmware and hardware internals are intentionally private in this public repo
-firmware/
+# Private hardware internals are intentionally excluded from this public repo.
+# Public firmware source is allowed; generated firmware binaries remain ignored below.
 hardware/private/
 hardware/kicad/
 hardware/cad/
